@@ -1,0 +1,43 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: white;
+    padding: 3px;
+}
+
+.dialog a.active {
+    color: gold;
+    text-decoration: none;
+}
+
+.messages {
+    padding: 10px;
+    color: white;
+}
+
+.message {
+  background-color: #6a92ff;
+    max-width: 50%;
+    /*word-wrap: break-word;*/
+    border: 1px solid #00d0ff;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-block-end: 5px;
+    opacity: 0.8;
+
+}
+
+.avatar {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.friends {
+
+}

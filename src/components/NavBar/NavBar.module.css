@@ -1,0 +1,19 @@
+.item a.activeLink {
+    color: gold;
+}
+.nav {
+    grid-area: nav;
+    background-color: #6a92ff;
+    padding: 10px;
+}
+
+.sidebar {
+    /*grid-area: nav;*/
+    background-color: #6a92ff;
+    padding: 10px;
+    color: white;
+}
+.item a {
+    color: white;
+    text-decoration: none;
+}

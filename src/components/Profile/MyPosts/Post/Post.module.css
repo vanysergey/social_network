@@ -1,0 +1,41 @@
+.item {
+    color: #f6e900;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.assessment {
+   margin: 15px;
+
+}
+.like {
+    width: 20px;
+    height: 20px;
+
+
+}
+
+.dislike {
+    width: 20px;
+    height: 20px;
+}
+
+.buttonsLikeDiselike {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: #fff; /* запасной цвет для старых браузеров */
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+    padding-right: 10px;
+    margin-right: 10px;
+
+}
