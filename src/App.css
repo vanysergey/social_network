@@ -13,7 +13,7 @@
 }
 
 .app-wrapper-content {
-    grid-area: content;
+    grid-area: auto;
     background-color: #517ff5;
 }
 

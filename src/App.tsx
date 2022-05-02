@@ -8,7 +8,7 @@ import {BrowserRouter, Route, Router} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Music} from './components/Music/Music';
-import State from './redux/State'
+import {addMessage, addPost, State, updateNewPostText} from './redux/State'
 
 function App () {
  let dialogsData = State.messagesPage.dialogsData
@@ -24,8 +24,8 @@ function App () {
                 <NavBar sidebar={sidebar}/>
 
                 <div className="app-wrapper-content">
-                   <Route /*exact*/ path="/profile" render={ ()=> <Profile postsData={postsData}/>}/>
-                   <Route /*exact*/ path="/dialogs/" render={()=> <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>}/>
+                   <Route /*exact*/ path="/profile" render={ ()=> <Profile  addPost={addPost} updateNewPostText={updateNewPostText} postsData={postsData} newPostText={State.profilePage.newPostText}/>}/>
+                   <Route /*exact*/ path="/dialogs/" render={()=> <Dialogs  addMessage={addMessage} dialogsData={dialogsData} messagesData={messagesData}/>}/>
                     <Route /*exact*/ path="/news" render={()=> <News/>}/>
                     <Route /*exact*/ path="/music" render={()=> <Music/>}/>
                     <Route /*exact*/ path="/settings" render={()=> <Settings/>}/>
