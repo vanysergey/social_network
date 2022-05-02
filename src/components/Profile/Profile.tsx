@@ -3,8 +3,11 @@ import s from './Profile.module.css';
 import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
-type profilePageElementType = {
+type ProfileType = {
     postsData: Array<postsDataType>
+    addPost:()=> void
+    newPostText: string
+    updateNewPostText:(newText:string)=> void
 }
 type postsDataType = {
     id: number,
@@ -12,17 +15,15 @@ type postsDataType = {
     like: number,
     dislike: number
 }
-export const Profile = (props: profilePageElementType) => {
-    /* const postsData = [
-         {id: 1, message: 'Hi, how are you?', like: 35, dislike: 3},
-         {id: 2, message: 'It\'s my first post', like: 30, dislike: 2},
-         {id: 3, message: 'It\'s my second post', like: 40, dislike: 1},
-     ]
- */  //вынесли из MyPost сюда, а потом уносим в Арр
+export const Profile = (props: ProfileType) => {
+
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}/>
+            <MyPosts callback={props.addPost}
+                     callback2={props.updateNewPostText}
+                     postsData={props.postsData}
+                     newPostText={props.newPostText}/>
         </div>
     );
 };

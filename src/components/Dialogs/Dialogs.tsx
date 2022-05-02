@@ -7,6 +7,7 @@ import {Message} from './Message/Message';
 type DialogsType = {
     dialogsData: Array<dialogsDataType>
     messagesData: Array<messagesDataType>
+    addMessage: (message: string) => void
 }
 
 type dialogsDataType = {
@@ -19,27 +20,35 @@ type messagesDataType = {
     message: string
 }
 
-export const Dialogs = (props:DialogsType) => {
-    let dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)
-    let messagesElements =props.messagesData.map (m => <Message message={m.message} id={m.id}/>)
+export const Dialogs = (props: DialogsType) => {
 
+    let dialogsElements = props.dialogsData.map(d => <DialogItem key={d.id} name={d.name} id={d.id} avatar={d.avatar}/>)
+    let messagesElements = props.messagesData.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
+    let newMessageElement = React.createRef<HTMLTextAreaElement>();
+
+    const addMessage = () => {
+
+        if (newMessageElement.current) {
+            props.addMessage(newMessageElement.current.value)
+            newMessageElement.current.value = ''
+        }
+
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElements}
-              {/*  <DialogItem name={props.dialogsData[0].name} id={props.dialogsData[0].id}/>
-                <DialogItem name={props.dialogsData[1].name} id={props.dialogsData[1].id}/>
-                <DialogItem name={props.dialogsData[2].name} id={props.dialogsData[2].id}/>
-                <DialogItem name={props.dialogsData[3].name} id={props.dialogsData[3].id}/>
-                <DialogItem name={props.dialogsData[4].name} id={props.dialogsData[4].id}/>
-                <DialogItem name={props.dialogsData[5].name} id={props.dialogsData[5].id}/>*/}
+
             </div>
             <div className={s.messages}>
                 {messagesElements}
-               {/* <Message message={props.messagesData[0].message} id={1}/>
-                <Message message={props.messagesData[1].message} id={2}/>
-                <Message message={props.messagesData[2].message} id={3}/>
-                <Message message={props.messagesData[3].message} id={3}/>*/}
+                <div className={s.addMessage}>
+                    <textarea ref={newMessageElement} className={s.textarea}></textarea>
+                    <div>
+                        <button onClick={addMessage} className={s.sendMessage}>Send message
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
