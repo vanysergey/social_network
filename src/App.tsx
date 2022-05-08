@@ -8,74 +8,39 @@ import {BrowserRouter, Route, } from 'react-router-dom';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Music} from './components/Music/Music';
+import {StoreType} from './redux/State';
 
 type AppType = {
-    State: RootStateType,
-    addPost: () => void,
-    updateNewPostText: (newText: string) => void,
-    addMessage: (Message: string) => void,
-}
-type RootStateType = {
-    profilePage: profilePageType
-    messagesPage: messagesPageType
-    sidebar: sidebarType
-}
-type postsDataType = {
-    id: number
-    message: string
-    like: number
-    dislike: number
-}
-type messagesDataType = {
-    id: number
-    message: string
-}
-type dialogsDataType = {
-    id: number
-    name: string
-    avatar: string
-}
-type friendsType = {
-    id: number
-    name: string
-    avatar: string
-}
-type sidebarType = {
-    friends: Array<friendsType>
-}
-type profilePageType = {
-    postsData: Array<postsDataType>
-    newPostText: string
-}
-type messagesPageType = {
-    messagesData: Array<messagesDataType>,
-    dialogsData: Array<dialogsDataType>
+   store: StoreType,
 }
 
-const App: React.FC<AppType> = (props: AppType) => {
-    let dialogsData = props.State.messagesPage.dialogsData
-    let messagesData = props.State.messagesPage.messagesData
-    let postsData = props.State.profilePage.postsData
-    let sidebar = props.State.sidebar.friends
-    let newPostText = props.State.profilePage.newPostText
+const App: React.FC<AppType> = (props) => {
 
+    const State = props.store.getState();
+    const dialogsData = State.messagesPage.dialogsData
+    const messagesData = State.messagesPage.messagesData
+    const postsData = State.profilePage.postsData
+    const sidebar = State.sidebar.friends
+    const newPostText = State.profilePage.newPostText
 
     return (
         <BrowserRouter>
+
             <div className="App-wrapper">
+                <div>blsdfjbsjgdbj hf</div>
                 <Header/>
                 <NavBar sidebar={sidebar}/>
 
                 <div className="app-wrapper-content">
                     <Route /*exact*/ path="/profile" render={() =>
                         <Profile
-                            addPost={props.addPost}
-                            updateNewPostText={props.updateNewPostText}
+                            addPost={props.store.addPost.bind(props.store)}
+                            updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                             postsData={postsData}
                             newPostText={newPostText}/>}/>
                     <Route /*exact*/ path="/dialogs/" render={() =>
                         <Dialogs
-                            addMessage={props.addMessage}
+                            addMessage={props.store.addMessage.bind(props.store)}
                             dialogsData={dialogsData}
                             messagesData={messagesData}/>}/>
                     <Route /*exact*/ path="/news" render={() => <News/>}/>

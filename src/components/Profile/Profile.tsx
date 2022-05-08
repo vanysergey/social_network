@@ -20,7 +20,7 @@ export const Profile = (props: ProfileType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts callback={props.addPost}
+            <MyPosts addPost={props.addPost}
                      callback2={props.updateNewPostText}
                      postsData={props.postsData}
                      newPostText={props.newPostText}/>

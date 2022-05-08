@@ -5,7 +5,7 @@ import {Post} from './Post/Post';
 
 type MyPostType = {
     postsData: Array<postsDataType>
-    callback: () => void
+    addPost: () => void
     callback2: (value: string) => void
     newPostText: string
 }
@@ -20,10 +20,8 @@ export const MyPosts = (props: MyPostType) => {
     let postsElements = props.postsData.map(p => <Post key={p.id} message={p.message} id={p.id} likeCount={p.like}
                                                        dislikeCount={p.dislike}/>)
 
-    // let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-    let addPost = () => {
-        props.callback()
+       let addPost = () => {
+        props.addPost()
     }
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
@@ -31,6 +29,7 @@ export const MyPosts = (props: MyPostType) => {
         }
     }
 
+    // @ts-ignore
     return (
         <div className={s.descriptionBlock}>
             <h3>My post</h3>
