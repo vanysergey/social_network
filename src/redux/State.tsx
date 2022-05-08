@@ -1,13 +1,9 @@
-import {message} from 'antd';
-import {rerenderEntireTree} from '../render';
-
 type postsDataType = {
     id: number
     message: string
     like: number
     dislike: number
 }
-
 type messagesDataType = {
     id: number
     message: string
@@ -38,6 +34,7 @@ export type RootStateType = {
     messagesPage: messagesPageType
     sidebar: sidebarType
 }
+
 
 
 export const State: RootStateType = {
@@ -113,6 +110,12 @@ export const State: RootStateType = {
     }
 }
 
+let rerenderEntireTree = (State:RootStateType) => {
+    console.log('Hello')
+}
+export const subscribe = (callback:(State:RootStateType)=>void)=>{
+    rerenderEntireTree = callback
+}
 export const addPost = () => {
     let newPost: postsDataType = {
         id: 5, message: State.profilePage.newPostText, like: 0, dislike: 0
@@ -131,7 +134,6 @@ export const addMessage = (Message: string) => {
     }
     State.messagesPage.messagesData.push(newMessage)
     console.log(State.messagesPage.messagesData)
-    debugger
     rerenderEntireTree(State)
 }
 // export default State;
