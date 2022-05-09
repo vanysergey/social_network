@@ -1,3 +1,4 @@
+
 type postsDataType = {
     id: number
     message: string
@@ -43,7 +44,6 @@ export type StoreType = {
     addMessage: (Message: string)=> void
     getState: ()=> RootStateType
 }
-
 export const store: StoreType = {
 
     _State: {
@@ -118,9 +118,7 @@ export const store: StoreType = {
             ]
         }
     },
-    _rerenderEntireTree() {
-        console.log('state changed')
-    },
+
     addPost() {
         let newPost: postsDataType = {
             id: new Date().getTime(),
@@ -143,6 +141,9 @@ export const store: StoreType = {
         this._State.messagesPage.messagesData.push(newMessage)
         console.log(this._State.messagesPage.messagesData)
         this._rerenderEntireTree()
+    },
+    _rerenderEntireTree() {
+        console.log('state changed')
     },
     subscribe(callback) {
         this._rerenderEntireTree = callback

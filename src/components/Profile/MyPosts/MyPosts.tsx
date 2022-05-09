@@ -2,7 +2,6 @@ import React, {ChangeEvent, ChangeEventHandler, MouseEventHandler} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 
-
 type MyPostType = {
     postsData: Array<postsDataType>
     addPost: () => void
@@ -29,7 +28,6 @@ export const MyPosts = (props: MyPostType) => {
         }
     }
 
-    // @ts-ignore
     return (
         <div className={s.descriptionBlock}>
             <h3>My post</h3>
