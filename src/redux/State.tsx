@@ -1,4 +1,3 @@
-
 type postsDataType = {
     id: number
     message: string
@@ -22,13 +21,14 @@ type friendsType = {
 type sidebarType = {
     friends: Array<friendsType>
 }
-type profilePageType = {
+export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
 }
-type messagesPageType = {
+export type messagesPageType = {
     messagesData: Array<messagesDataType>,
-    dialogsData: Array<dialogsDataType>
+    dialogsData: Array<dialogsDataType>,
+    newMessageText: string
 }
 export type RootStateType = {
     profilePage: profilePageType
@@ -39,11 +39,24 @@ export type StoreType = {
     _State: RootStateType
     _rerenderEntireTree: () => void
     subscribe: (callback: () => void) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: (Message: string)=> void
-    getState: ()=> RootStateType
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addMessage: (Message: string) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
 }
+
+export type ActionsTypes =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddMessageType
+    | UpdateNewMessageActionAType
+type AddPostActionType = ReturnType<typeof AddPostAC>
+type UpdateNewPostTextActionType = ReturnType<typeof UpdateNewPostTextActionAC>
+type AddMessageType = ReturnType<typeof AddMessageAC>
+type UpdateNewMessageActionAType = ReturnType<typeof UpdateNewMessageActionAC>
+
+
 export const store: StoreType = {
 
     _State: {
@@ -61,10 +74,12 @@ export const store: StoreType = {
                 {id: 2, message: 'Hi'},
                 {
                     id: 3,
-                    message: 'Yooo. None of the OTHER CSS border properties (which you will learn more about in the next chapters) will have ANY effect unless the border-style property is set!'
+                    message: 'Yooo. None of the OTHER CSS border properties!'
                 },
                 {id: 4, message: 'What`s up.'},
+
             ],
+            newMessageText: '',
             dialogsData: [
                 {
                     id: 1,
@@ -119,29 +134,6 @@ export const store: StoreType = {
         }
     },
 
-    addPost() {
-        let newPost: postsDataType = {
-            id: new Date().getTime(),
-            message: this._State.profilePage.newPostText,
-            like: 0,
-            dislike: 0
-        }
-        this._State.profilePage.postsData.push(newPost)
-        this._State.profilePage.newPostText = ('')
-        this._rerenderEntireTree()
-    },
-    updateNewPostText(newText: string) {
-        this._State.profilePage.newPostText = newText
-        this._rerenderEntireTree()
-    },
-    addMessage (Message: string)  {
-        let newMessage: messagesDataType = {
-            id: 5, message: Message
-        }
-        this._State.messagesPage.messagesData.push(newMessage)
-        console.log(this._State.messagesPage.messagesData)
-        this._rerenderEntireTree()
-    },
     _rerenderEntireTree() {
         console.log('state changed')
     },
@@ -150,5 +142,57 @@ export const store: StoreType = {
     },
     getState() {
         return this._State
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: postsDataType = {
+                id: new Date().getTime(),
+                message: this._State.profilePage.newPostText,
+                like: 0,
+                dislike: 0
+            }
+            this._State.profilePage.postsData.push(newPost)
+            this._State.profilePage.newPostText = ('')
+            this._rerenderEntireTree()
+        } else if (action.type === 'UPDATE-NEW-POST') {
+            this._State.profilePage.newPostText = action.newText
+            this._rerenderEntireTree()
+        } else if (action.type === 'ADD-MESSAGE') {
+
+            let newMessage: messagesDataType = {
+                id: new Date().getTime(), message: this._State.messagesPage.newMessageText
+            }
+            this._State.messagesPage.messagesData.push(newMessage)
+            this._State.messagesPage.newMessageText= ('')
+            this._rerenderEntireTree()
+
+        } else if (action.type === 'UPDATE-NEW-MESSAGE') {
+            this._State.messagesPage.newMessageText = action.newMessage
+            this._rerenderEntireTree()
+        }
     }
+}
+
+export const AddPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const UpdateNewPostTextActionAC = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST',
+        newText: text
+    } as const
+}
+export const AddMessageAC = () => {
+    return {
+        type: 'ADD-MESSAGE'
+    } as const
+}
+export const UpdateNewMessageActionAC = (Message: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE',
+        newMessage: Message
+    } as const
 }

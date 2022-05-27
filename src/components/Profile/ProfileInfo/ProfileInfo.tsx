@@ -6,7 +6,8 @@ export const ProfileInfo = () => {
         <div>
             <div>
                 <img className={s.contentImg}
-                     src="https://phonoteka.org/uploads/posts/2021-07/thumbs/1625567260_12-phonoteka-org-p-velosiped-zastavka-krasivie-zastavki-12.jpg"
+                    // src="../../../../public/img/content.jpg"
+                   src="https://mobimg.b-cdn.net/v3/fetch/c6/c6c09f523788bb0db3dcee1593a93367.jpeg"
                      alt="content"/>
             </div>
             <div className={s.descriptionBlock}>

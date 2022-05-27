@@ -1,30 +1,30 @@
-import React, {ChangeEvent, ChangeEventHandler, MouseEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
+import {ActionsTypes, AddPostAC, profilePageType, UpdateNewPostTextActionAC} from '../../../redux/State';
 
 type MyPostType = {
-    postsData: Array<postsDataType>
-    addPost: () => void
-    callback2: (value: string) => void
-    newPostText: string
+    profilePage: profilePageType
+    dispatch: (action: ActionsTypes) => void
+
 }
-type postsDataType = {
-    id: number,
-    message: string,
-    like: number,
-    dislike: number
-}
+
 
 export const MyPosts = (props: MyPostType) => {
-    let postsElements = props.postsData.map(p => <Post key={p.id} message={p.message} id={p.id} likeCount={p.like}
-                                                       dislikeCount={p.dislike}/>)
+    let postsElements = props.profilePage.postsData.map(p => <Post
+        key={p.id}
+        message={p.message}
+        id={p.id}
+        likeCount={p.like}
+        dislikeCount={p.dislike}/>)
 
-       let addPost = () => {
-        props.addPost()
+    let addPost = () => {
+        props.dispatch(AddPostAC())
     }
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
-            props.callback2(e.currentTarget.value)
+            const text = e.currentTarget.value
+            props.dispatch(UpdateNewPostTextActionAC(text))
         }
     }
 
@@ -33,9 +33,8 @@ export const MyPosts = (props: MyPostType) => {
             <h3>My post</h3>
             <div className={s.posts}>
                 <div><textarea
-                    // ref={newPostElement}
                     onChange={onPostChange}
-                    value={props.newPostText}/></div>
+                    value={props.profilePage.newPostText}/></div>
                 <div className={s.descriptionBlock}>
                     <button onClick={addPost}>Add post</button>
                 </div>

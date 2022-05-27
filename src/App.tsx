@@ -18,11 +18,10 @@ type AppType = {
 const App: React.FC<AppType> = (props) => {
 
     const State = props.store.getState();
-    const dialogsData = State.messagesPage.dialogsData
-    const messagesData = State.messagesPage.messagesData
-    const postsData = State.profilePage.postsData
+    const messagesPage = State.messagesPage
+    const profilePage = State.profilePage
     const sidebar = State.sidebar.friends
-    const newPostText = State.profilePage.newPostText
+
 
     return (
         <BrowserRouter>
@@ -34,15 +33,17 @@ const App: React.FC<AppType> = (props) => {
 
                     <Route /*exact*/ path="/profile" render={() =>
                         <Profile
-                            addPost={props.store.addPost.bind(props.store)}
-                            updateNewPostText={props.store.updateNewPostText.bind(props.store)}
-                            postsData={postsData}
-                            newPostText={newPostText}/>}/>
+
+                            dispatch={props.store.dispatch.bind(props.store)}
+                            profilePage={profilePage}
+
+                        />}/>
                     <Route /*exact*/ path="/dialogs/" render={() =>
                         <Dialogs
-                            addMessage={props.store.addMessage.bind(props.store)}
-                            dialogsData={dialogsData}
-                            messagesData={messagesData}/>}/>
+                            dispatch={props.store.dispatch.bind(props.store)}
+                            messagesPage={messagesPage}
+
+                        />}/>
                     <Route /*exact*/ path="/news" render={() => <News/>}/>
                     <Route /*exact*/ path="/music" render={() => <Music/>}/>
                     <Route /*exact*/ path="/settings" render={() => <Settings/>}/>

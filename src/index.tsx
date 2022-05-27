@@ -9,12 +9,12 @@ const rerenderEntireTree = () => {
 
     ReactDOM.render(
         <React.StrictMode>
-           <App store={store} />
+            <App store={store}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
-
-store.subscribe(rerenderEntireTree)
 rerenderEntireTree()
+store.subscribe(rerenderEntireTree)
+
 
