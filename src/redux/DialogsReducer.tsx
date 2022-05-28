@@ -4,7 +4,7 @@ import {ActionsTypes, dialogsPageType, messagesDataType} from './State';
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
 
-const MessageReducer = (State: dialogsPageType, action: ActionsTypes) => {
+const DialogsReducer = (State: dialogsPageType, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage: messagesDataType = {
@@ -22,4 +22,4 @@ const MessageReducer = (State: dialogsPageType, action: ActionsTypes) => {
 
 };
 
-export default MessageReducer;
+export default DialogsReducer;

@@ -1,4 +1,4 @@
-import MessageReducer from './MessageReducer';
+import DialogsReducer from './DialogsReducer';
 import ProfileReducer from './ProfileReducer';
 import SidebarReducer from './SidebarReducer';
 
@@ -148,7 +148,7 @@ export const store: StoreType = {
 
     dispatch(action) {
         this._State.profilePage = ProfileReducer(this._State.profilePage, action)
-        this._State.dialogsPage = MessageReducer(this._State.dialogsPage, action)
+        this._State.dialogsPage = DialogsReducer(this._State.dialogsPage, action)
         this._State.sidebar = SidebarReducer(this._State.sidebar, action)
 
         this._rerenderEntireTree()

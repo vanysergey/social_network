@@ -2,21 +2,21 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './Message/DialogItem';
 import {Message} from './Message/Message';
-import {ActionsTypes, AddMessageAC, messagesPageType, UpdateNewMessageActionAC} from '../../redux/State';
+import {ActionsTypes, AddMessageAC, dialogsPageType, UpdateNewMessageActionAC} from '../../redux/State';
 
 
 type DialogsType = {
-    messagesPage: messagesPageType
+    dialogsPage: dialogsPageType
     dispatch: (action: ActionsTypes) => void
 }
 
 export const Dialogs = (props: DialogsType) => {
 
-    let dialogsElements = props.messagesPage.dialogsData.map(d => <DialogItem
+    let dialogsElements = props.dialogsPage.dialogsData.map(d => <DialogItem
         key={d.id} name={d.name} id={d.id} avatar={d.avatar}/>)
-    let messagesElements = props.messagesPage.messagesData.map(m => <Message
+    let messagesElements = props.dialogsPage.messagesData.map(m => <Message
         key={m.id} message={m.message} id={m.id}/>)
-    let newPostText = props.messagesPage.newMessageText
+    let newPostText = props.dialogsPage.newMessageText
 
 
     const addMessage = () => {

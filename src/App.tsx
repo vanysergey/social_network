@@ -18,9 +18,10 @@ type AppType = {
 const App: React.FC<AppType> = (props) => {
 
     const State = props.store.getState();
-    const messagesPage = State.messagesPage
+    const dialogsPage = State.dialogsPage
     const profilePage = State.profilePage
     const sidebar = State.sidebar.friends
+
 
 
     return (
@@ -41,7 +42,7 @@ const App: React.FC<AppType> = (props) => {
                     <Route /*exact*/ path="/dialogs/" render={() =>
                         <Dialogs
                             dispatch={props.store.dispatch.bind(props.store)}
-                            messagesPage={messagesPage}
+                            dialogsPage={dialogsPage}
 
                         />}/>
                     <Route /*exact*/ path="/news" render={() => <News/>}/>
