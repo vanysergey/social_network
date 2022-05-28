@@ -1,47 +1,49 @@
-type postsDataType = {
+import MessageReducer from './MessageReducer';
+import ProfileReducer from './ProfileReducer';
+import SidebarReducer from './SidebarReducer';
+
+export type postsDataType = {
     id: number
     message: string
     like: number
     dislike: number
 }
-type messagesDataType = {
+export type messagesDataType = {
     id: number
     message: string
 }
-type dialogsDataType = {
+export type dialogsDataType = {
     id: number
     name: string
     avatar: string
 }
-type friendsType = {
+export type friendsType = {
     id: number
     name: string
     avatar: string
 }
-type sidebarType = {
+export type sidebarType = {
     friends: Array<friendsType>
 }
 export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
 }
-export type messagesPageType = {
+export type dialogsPageType = {
     messagesData: Array<messagesDataType>,
     dialogsData: Array<dialogsDataType>,
     newMessageText: string
 }
 export type RootStateType = {
     profilePage: profilePageType
-    messagesPage: messagesPageType
+    dialogsPage: dialogsPageType
     sidebar: sidebarType
 }
 export type StoreType = {
     _State: RootStateType
     _rerenderEntireTree: () => void
     subscribe: (callback: () => void) => void
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
-    // addMessage: (Message: string) => void
+
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
@@ -68,7 +70,7 @@ export const store: StoreType = {
             ],
             newPostText: ''
         },
-        messagesPage: {
+        dialogsPage: {
             messagesData: [
                 {id: 1, message: 'Hello'},
                 {id: 2, message: 'Hi'},
@@ -103,7 +105,7 @@ export const store: StoreType = {
                 },
                 {
                     id: 5,
-                    name: 'IIIIgooor',
+                    name: 'Igooor',
                     avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
                 },
                 {
@@ -127,7 +129,7 @@ export const store: StoreType = {
                 },
                 {
                     id: 3,
-                    name: 'IIIIgooor',
+                    name: 'Igooor',
                     avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
                 },
             ]
@@ -145,32 +147,11 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: postsDataType = {
-                id: new Date().getTime(),
-                message: this._State.profilePage.newPostText,
-                like: 0,
-                dislike: 0
-            }
-            this._State.profilePage.postsData.push(newPost)
-            this._State.profilePage.newPostText = ('')
-            this._rerenderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST') {
-            this._State.profilePage.newPostText = action.newText
-            this._rerenderEntireTree()
-        } else if (action.type === 'ADD-MESSAGE') {
+        this._State.profilePage = ProfileReducer(this._State.profilePage, action)
+        this._State.dialogsPage = MessageReducer(this._State.dialogsPage, action)
+        this._State.sidebar = SidebarReducer(this._State.sidebar, action)
 
-            let newMessage: messagesDataType = {
-                id: new Date().getTime(), message: this._State.messagesPage.newMessageText
-            }
-            this._State.messagesPage.messagesData.push(newMessage)
-            this._State.messagesPage.newMessageText= ('')
-            this._rerenderEntireTree()
-
-        } else if (action.type === 'UPDATE-NEW-MESSAGE') {
-            this._State.messagesPage.newMessageText = action.newMessage
-            this._rerenderEntireTree()
-        }
+        this._rerenderEntireTree()
     }
 }
 
