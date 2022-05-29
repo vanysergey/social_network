@@ -25,4 +25,17 @@ const ProfileReducer = (State: profilePageType, action: ActionsTypes) => {
     }
 
 }
+
+export const AddPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const UpdateNewPostTextActionAC = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST',
+        newText: text
+    } as const
+}
+
 export default ProfileReducer;

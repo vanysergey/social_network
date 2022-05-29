@@ -1,5 +1,5 @@
-import DialogsReducer from './DialogsReducer';
-import ProfileReducer from './ProfileReducer';
+import DialogsReducer, {AddMessageAC, UpdateNewMessageActionAC} from './DialogsReducer';
+import ProfileReducer, {AddPostAC, UpdateNewPostTextActionAC} from './ProfileReducer';
 import SidebarReducer from './SidebarReducer';
 
 export type postsDataType = {
@@ -105,7 +105,7 @@ export const store: StoreType = {
                 },
                 {
                     id: 5,
-                    name: 'Igooor',
+                    name: 'Igor',
                     avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
                 },
                 {
@@ -129,7 +129,7 @@ export const store: StoreType = {
                 },
                 {
                     id: 3,
-                    name: 'Igooor',
+                    name: 'Igor',
                     avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
                 },
             ]
@@ -155,25 +155,5 @@ export const store: StoreType = {
     }
 }
 
-export const AddPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-export const UpdateNewPostTextActionAC = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-POST',
-        newText: text
-    } as const
-}
-export const AddMessageAC = () => {
-    return {
-        type: 'ADD-MESSAGE'
-    } as const
-}
-export const UpdateNewMessageActionAC = (Message: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE',
-        newMessage: Message
-    } as const
-}
+
+
