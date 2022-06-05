@@ -1,16 +1,18 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import {AddPostAC, UpdateNewPostTextActionAC} from '../../../redux/ProfileReducer';
-import {ActionsTypes, profilePageType} from '../../../redux/State';
+import {postsDataType} from '../../../redux/State';
 
 type MyPostType = {
-    profilePage: profilePageType
-    dispatch: (action: ActionsTypes) => void
+    UpdateNewPostText: (text: string) => void
+    addPost: () => void
+    postsData: Array<postsDataType>
+    newPostText: string
 }
 
 export const MyPosts = (props: MyPostType) => {
-    let postsElements = props.profilePage.postsData.map(p => <Post
+
+    let postsElements = props.postsData.map(p => <Post
         key={p.id}
         message={p.message}
         id={p.id}
@@ -18,19 +20,18 @@ export const MyPosts = (props: MyPostType) => {
         dislikeCount={p.dislike}/>)
 
     let addPost = () => {
-        props.dispatch(AddPostAC())
+        props.addPost()
     }
     const onKeyPressEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            addPost()
+            props.addPost()
         }
     }
-
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
             const text = e.currentTarget.value
-            props.dispatch(UpdateNewPostTextActionAC(text))
+            props.UpdateNewPostText(text)
         }
     }
 
@@ -41,7 +42,7 @@ export const MyPosts = (props: MyPostType) => {
                 <div><textarea
                     onChange={onPostChange}
                     onKeyPress={onKeyPressEnter}
-                    value={props.profilePage.newPostText}/></div>
+                    value={props.newPostText}/></div>
                 <div className={s.descriptionBlock}>
                     <button onClick={addPost}>Add post</button>
                 </div>
