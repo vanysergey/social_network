@@ -3,7 +3,7 @@ import ProfileReducer from './ProfileReducer';
 import DialogsReducer from './DialogsReducer';
 import SidebarReducer from './SidebarReducer';
 
-// export type ReducesType = ReturnType<typeof reduces>
+export type ReducesType = ReturnType<typeof reduces>
 
 let reduces = combineReducers({
     profilePage: ProfileReducer,

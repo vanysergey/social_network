@@ -4,7 +4,7 @@ import {ActionsTypes, dialogsPageType, messagesDataType} from './State';
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
 
-let initailState = {
+let initialState = {
     messagesData: [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'Hi'},
@@ -50,7 +50,7 @@ let initailState = {
     ]
 }
 
-const DialogsReducer = (State: dialogsPageType = initailState, action: ActionsTypes) => {
+const DialogsReducer = (State: dialogsPageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage: messagesDataType = {

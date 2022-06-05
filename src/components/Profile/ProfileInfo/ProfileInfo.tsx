@@ -7,8 +7,10 @@ export const ProfileInfo = () => {
         <div>
             <div>
                 <img className={s.contentImg}
-                     src="https://mobimg.b-cdn.net/v3/fetch/c6/c6c09f523788bb0db3dcee1593a93367.jpeg"
-                     width="300px"
+                     // src="https://mobimg.b-cdn.net/v3/fetch/c6/c6c09f523788bb0db3dcee1593a93367.jpeg"
+                     src={require('../../../img/content.png')}
+
+                     width="400px"
                      alt="content"
                 />
             </div>

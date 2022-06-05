@@ -3,48 +3,35 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {NavBar} from './components/NavBar/NavBar';
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route,} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Music} from './components/Music/Music';
-import {StoreType} from './redux/State';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 
 type AppType = {
-    store: StoreType,
+    store: any //StoreType,
 }
 
 const App: React.FC<AppType> = (props) => {
 
     const State = props.store.getState();
-    const dialogsPage = State.dialogsPage
-    const profilePage = State.profilePage
-    const sidebar = State.sidebar.friends
-
-
 
     return (
         <BrowserRouter>
             <div className="App-wrapper">
                 <Header/>
-                <NavBar sidebar={sidebar}/>
+                <NavBar sidebar={State.sidebar.friends}/>
 
                 <div className="app-wrapper-content">
 
                     <Route /*exact*/ path="/profile" render={() =>
-                        <Profile
-
-                            dispatch={props.store.dispatch.bind(props.store)}
-                            profilePage={profilePage}
-
-                        />}/>
+                        <Profile store={props.store}/>}
+                    />
                     <Route /*exact*/ path="/dialogs/" render={() =>
-                        <Dialogs
-                            dispatch={props.store.dispatch.bind(props.store)}
-                            dialogsPage={dialogsPage}
-
-                        />}/>
+                        <DialogsContainer store={props.store}/>}
+                    />
                     <Route /*exact*/ path="/news" render={() => <News/>}/>
                     <Route /*exact*/ path="/music" render={() => <Music/>}/>
                     <Route /*exact*/ path="/settings" render={() => <Settings/>}/>
