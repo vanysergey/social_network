@@ -8,29 +8,26 @@ import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Music} from './components/Music/Music';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
+import store from './redux/redux-store';
 
 
-type AppType = {
-    store: any //StoreType,
-}
+const App = () => {
 
-const App: React.FC<AppType> = (props) => {
-
-    const State = props.store.getState();
+    // const State = props.store.getState();
 
     return (
         <BrowserRouter>
             <div className="App-wrapper">
                 <Header/>
-                <NavBar sidebar={State.sidebar.friends}/>
+                <NavBar sidebar={store.getState().sidebar.friends}/>
 
                 <div className="app-wrapper-content">
 
                     <Route /*exact*/ path="/profile" render={() =>
-                        <Profile store={props.store}/>}
+                        <Profile/>}
                     />
                     <Route /*exact*/ path="/dialogs/" render={() =>
-                        <DialogsContainer store={props.store}/>}
+                        <DialogsContainer/>}
                     />
                     <Route /*exact*/ path="/news" render={() => <News/>}/>
                     <Route /*exact*/ path="/music" render={() => <Music/>}/>
