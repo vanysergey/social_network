@@ -1,7 +1,18 @@
 import React from 'react';
-import {ActionsTypes, sidebarType} from './State';
+import {ActionsTypes} from './State';
 
-let initailState = {
+export type friendsType = {
+    id: number
+    name: string
+    avatar: string
+}
+export type sidebarType = {
+    friends: Array<friendsType>
+}
+
+export type SidebarReducerType = typeof initialState
+
+let initialState = {
     friends: [
         {
             id: 1,
@@ -19,8 +30,9 @@ let initailState = {
             avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
         },
     ]
+    //as Array<friendsType>
 }
-const SidebarReducer = (State: sidebarType = initailState, action: ActionsTypes) => {
+const SidebarReducer = (State: SidebarReducerType = initialState, action: ActionsTypes): SidebarReducerType => {
 
     return State
 };
