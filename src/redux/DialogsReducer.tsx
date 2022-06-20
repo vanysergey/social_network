@@ -1,20 +1,29 @@
 import React from 'react';
-import {ActionsTypes, dialogsPageType, messagesDataType} from './State';
+import {ActionsTypes} from './State';
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
+
+type messagesDataType = {
+    id: number
+    message: string
+}
+type dialogsDataType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+export type DialogsReducerType = typeof initialState
+
 
 let initialState = {
     messagesData: [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'Hi'},
-        {
-            id: 3,
-            message: 'Yooo. None of the OTHER CSS border properties!'
-        },
+        {id: 3, message: 'Yooo. None of the OTHER CSS border properties!'},
         {id: 4, message: 'What`s up.'},
-
-    ],
+    ] as Array<messagesDataType>,
     newMessageText: '',
     dialogsData: [
         {
@@ -47,10 +56,10 @@ let initialState = {
             name: 'Artyr',
             avatar: 'https://w7.pngwing.com/pngs/165/652/png-transparent-businessperson-computer-icons-avatar-avatar-heroes-public-relations-business.png'
         }
-    ]
+    ] as Array<dialogsDataType>
 }
 
-const DialogsReducer = (State: dialogsPageType = initialState, action: ActionsTypes) => {
+const DialogsReducer = (State: DialogsReducerType = initialState, action: ActionsTypes): DialogsReducerType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage: messagesDataType = {
@@ -70,12 +79,12 @@ const DialogsReducer = (State: dialogsPageType = initialState, action: ActionsTy
 
 export const AddMessageAC = () => {
     return {
-        type: 'ADD-MESSAGE'
+        type: ADD_MESSAGE
     } as const
 }
 export const UpdateNewMessageActionAC = (Message: string) => {
     return {
-        type: 'UPDATE-NEW-MESSAGE',
+        type: UPDATE_NEW_MESSAGE,
         newMessage: Message
     } as const
 }

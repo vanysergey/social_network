@@ -2,18 +2,10 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './Message/DialogItem';
 import {Message} from './Message/Message';
-import {dialogsDataType, messagesDataType} from '../../redux/State';
+import {DialogsPropsType} from './DialogsContainer';
 
 
-type DialogsType = {
-    dialogsData: Array<dialogsDataType>
-    messagesData: Array<messagesDataType>
-    newMessageText: string
-    addMessage: () => void
-    updateNewMessageAction: (Message: string) => void
-}
-
-export const Dialogs = (props: DialogsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.dialogsData.map(d => <DialogItem
         key={d.id} name={d.name} id={d.id} avatar={d.avatar}/>)
@@ -27,7 +19,7 @@ export const Dialogs = (props: DialogsType) => {
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
             const Message = e.currentTarget.value
-            props.updateNewMessageAction(Message)
+            props.onNewMessageChange(Message)
         }
     }
     const onKeyPressEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
