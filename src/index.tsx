@@ -3,11 +3,10 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import ReactDOM from 'react-dom';
-import {Provider,} from './StoreContext';
+import {Provider} from 'react-redux';
 
 
 const rerenderEntireTree = () => {
-
 
     ReactDOM.render(
         <React.StrictMode>
