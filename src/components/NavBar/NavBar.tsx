@@ -2,16 +2,10 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './NavBar.module.css';
 import {Friends} from '../Sidebar/Friends';
+import {SidebarPropsType} from './NavBarContainer';
 
-type sidebarType = {
-    sidebar: Array<friendsType>
-}
-type friendsType = {
-    id: number
-    name: string
-    avatar: string
-}
-export const NavBar = (props: sidebarType) => {
+
+export const NavBar = (props: SidebarPropsType) => {
     let friend = props.sidebar.map(f => <Friends id={f.id} name={f.name} avatar={f.avatar}/>)
     return (
         <div>
