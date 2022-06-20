@@ -1,16 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import {postsDataType} from '../../../redux/State';
+import {MyPostsPropsType} from './MyPostsContainer';
 
-type MyPostType = {
-    UpdateNewPostText: (text: string) => void
-    addPost: () => void
-    postsData: Array<postsDataType>
-    newPostText: string
-}
 
-export const MyPosts = (props: MyPostType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElements = props.postsData.map(p => <Post
         key={p.id}
