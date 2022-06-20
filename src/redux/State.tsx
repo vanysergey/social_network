@@ -2,48 +2,47 @@ import DialogsReducer, {AddMessageAC, UpdateNewMessageActionAC} from './DialogsR
 import ProfileReducer, {AddPostAC, UpdateNewPostTextActionAC} from './ProfileReducer';
 import SidebarReducer from './SidebarReducer';
 
-export type postsDataType = {
+type postsDataType = {
     id: number
     message: string
     like: number
     dislike: number
 }
-export type messagesDataType = {
+type messagesDataType = {
     id: number
     message: string
 }
-export type dialogsDataType = {
+type dialogsDataType = {
     id: number
     name: string
     avatar: string
 }
-export type friendsType = {
+type friendsType = {
     id: number
     name: string
     avatar: string
 }
-export type sidebarType = {
+type sidebarType = {
     friends: Array<friendsType>
 }
-export type profilePageType = {
+type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
 }
-export type dialogsPageType = {
+type dialogsPageType = {
     messagesData: Array<messagesDataType>,
     dialogsData: Array<dialogsDataType>,
     newMessageText: string
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
     sidebar: sidebarType
 }
-export type StoreType = {
+type StoreType = {
     _State: RootStateType
     _rerenderEntireTree: () => void
     subscribe: (callback: () => void) => void
-
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
@@ -59,7 +58,7 @@ type AddMessageType = ReturnType<typeof AddMessageAC>
 type UpdateNewMessageActionAType = ReturnType<typeof UpdateNewMessageActionAC>
 
 
-export const store: StoreType = {
+const store: StoreType = {
 
     _State: {
         profilePage: {
